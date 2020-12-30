@@ -16,7 +16,7 @@
   Access-Control-Allow-Origin = "https://weunlock.nyc"
   Access-Control-Allow-Methods='GET, POST, PATCH, OPTIONS'
   Access-Control-Allow-Headers='Content-Type'
-  Access-Control-Allow-Credentials='true'
+  Access-Control-Allow-Credentials=true
 
 [template.environment]
   ACKEE_MONGODB = "ACKEE_MONGODB"
