@@ -9,15 +9,8 @@
   to = "/.netlify/functions/api"
   status = 200
   force = true
-  
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-  Access-Control-Allow-Origin = "https://weunlock.nyc"
-  Access-Control-Allow-Methods='GET, POST, PATCH, OPTIONS'
-  Access-Control-Allow-Headers='Content-Type'
-  Access-Control-Allow-Credentials=true
-
+  headers = {Access-Control-Allow-Origin = "https://weunlock.nyc", Access-Control-Allow-Methods= "GET, POST, PATCH, OPTIONS", Access-Control-Allow-Headers='Content-Type', Access-Control-Allow-Credentials=true  }
+ 
 [template.environment]
   ACKEE_MONGODB = "ACKEE_MONGODB"
   ACKEE_USERNAME = "ACKEE_USERNAME"
