@@ -9,7 +9,7 @@ const { ApolloServer } = require('apollo-server-micro')
 
 const KnownError = require('./utils/KnownError')
 const signale = require('./utils/signale')
-const isDefined = require('./utils/isDefined')
+const config = require('./utils/config')
 const findMatchingOrigin = require('./utils/findMatchingOrigin')
 const customTracker = require('./utils/customTracker')
 const createApolloServer = require('./utils/createApolloServer')
@@ -51,16 +51,16 @@ const handleGraphError = (err) => {
 	// errors will only show up in the response and as a warning
 	// in the console output.
 
-	const originalError = err.originalError
-	const isKnownError = originalError instanceof KnownError
+	const suitableError = err.originalError || err
+	const isKnownError = suitableError instanceof KnownError
 
 	// Only log the full error stack when the error isn't a known response
 	if (isKnownError === false) {
-		signale.fatal(originalError)
+		signale.fatal(suitableError)
 		return err
 	}
 
-	signale.warn(err.originalError.message)
+	signale.warn(suitableError.message)
 	return err
 
 }
@@ -77,12 +77,12 @@ const catchError = (fn) => async (req, res) => {
 
 const attachCorsHeaders = (fn) => async (req, res) => {
 
-	const matchingOrigin = findMatchingOrigin(req, process.env.ACKEE_ALLOW_ORIGIN)
+	const matchingOrigin = findMatchingOrigin(req, config.allowOrigin)
 
 	if (matchingOrigin != null) {
 		res.setHeader('Access-Control-Allow-Origin', matchingOrigin)
 		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
-		res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+		res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Time-Zone')
 		res.setHeader('Access-Control-Allow-Credentials', 'true')
 	}
 
@@ -139,6 +139,7 @@ const routes = [
 
 	post(graphqlPath, graphqlHandler),
 	get(graphqlPath, graphqlHandler),
+	get('/.well-known/apollo/server-health', graphqlHandler),
 
 	get('/*', notFound),
 	post('/*', notFound),
@@ -146,7 +147,7 @@ const routes = [
 	patch('/*', notFound),
 	del('/*', notFound)
 
-].filter(isDefined)
+].filter(Boolean)
 
 module.exports = micro(
 	attachCorsHeaders(

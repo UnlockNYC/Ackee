@@ -4,7 +4,7 @@
 
 # Ackee
 
-[![Travis Build Status](https://travis-ci.org/electerious/Ackee.svg?branch=master)](https://travis-ci.org/electerious/Ackee) [![Coverage Status](https://coveralls.io/repos/github/electerious/Ackee/badge.svg?branch=master)](https://coveralls.io/github/electerious/Ackee?branch=master) [![Dependencies](https://david-dm.org/electerious/Ackee.svg)](https://david-dm.org/electerious/Ackee#info=dependencies) [![Mentioned in Awesome Selfhosted](https://awesome.re/mentioned-badge.svg)](https://github.com/awesome-selfhosted/awesome-selfhosted) [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CYKBESW577YWE)
+![Build](https://github.com/electerious/Ackee/workflows/Build/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/electerious/Ackee/badge.svg?branch=master)](https://coveralls.io/github/electerious/Ackee?branch=master) [![Mentioned in Awesome Selfhosted](https://awesome.re/mentioned-badge.svg)](https://github.com/awesome-selfhosted/awesome-selfhosted) [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CYKBESW577YWE)
 
 Self-hosted, Node.js based analytics tool for those who care about privacy. Ackee runs on your own server, analyzes the traffic of your websites and provides useful statistics in a minimal interface.
 
@@ -24,6 +24,7 @@ Ackee is a self-hosted analytics tool that cares about privacy. We believe that 
 - **Modern technologies**: Lightweight Node.js and MongoDB architecture
 - **Beautiful**: Minimal and focused interface
 - **No cookies**: No unique user tracking and therefore no required cookie message
+- **Events**: Track button clicks, newsletter subscriptions and more
 - **GraphQL API**: Fully documented GraphQL API that allows you to build new tools upon Ackee
 
 ## 🚀 Get started
@@ -79,15 +80,18 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 
 - [ackee-tracker](https://github.com/electerious/ackee-tracker) - Transfer data to Ackee
 - [ackee-bitbar](https://github.com/electerious/ackee-bitbar) - Ackee stats in your macOS menu bar
+- [ackee-lighthouse](https://github.com/electerious/ackee-lighthouse) - Send Lighthouse reports to Ackee
 - [ackee-report](https://github.com/BetaHuhn/ackee-report) - CLI tool to generate performance reports
 - [gatsby-plugin-ackee-tracker](https://github.com/Burnsy/gatsby-plugin-ackee-tracker) - Gatsby plugin for Ackee
 - [Soapberry](https://wordpress.org/plugins/soapberry/) - WordPress plugin for Ackee
 - [Ackee-PHP](https://github.com/BrookeDot/ackee-php) - A PHP Class for Ackee
 - [use-ackee](https://github.com/electerious/use-ackee) - Use Ackee in React
 - [nuxt-ackee](https://github.com/bdrtsky/nuxt-ackee) - Nuxt.js module for Ackee
+- [ngx-ackee-wrapper](https://github.com/oakify/ngx-ackee-wrapper) - Angular wrapper for Ackee
 - [django-ackee-middleware](https://github.com/suda/django-ackee-middleware) - Django middleware for Ackee
 - [gridsome-plugin-ackee](https://github.com/DenzoNL/gridsome-plugin-ackee) - Gridsome plugin for Ackee
 - [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee) - VuePress plugin for Ackee
+- [svelte-ackee](https://github.com/gaia-green-tech/svelte-ackee) - Svelte module for Ackee
 
 ### Links
 
