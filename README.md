@@ -38,7 +38,10 @@ Get Ackee up and running…
 - […with Netlify](docs/Get%20started.md#with-netlify)
 - […with Vercel](docs/Get%20started.md#with-vercel)
 - […with Heroku](docs/Get%20started.md#with-heroku)
+- […with Qovery](docs/Get%20started.md#with-qovery)
 - […with Render](docs/Get%20started.md#with-render)
+- […with Railway](docs/Get%20started.md#with-railway)
+- […with Koyeb](docs/Get%20started.md#with-koyeb)
 
 And configure Ackee and your server correctly…
 
@@ -92,6 +95,8 @@ I am working hard on continuously developing and maintaining Ackee. Please consi
 - [gridsome-plugin-ackee](https://github.com/DenzoNL/gridsome-plugin-ackee) - Gridsome plugin for Ackee
 - [vuepress-plugin-ackee](https://github.com/spekulatius/vuepress-plugin-ackee) - VuePress plugin for Ackee
 - [svelte-ackee](https://github.com/gaia-green-tech/svelte-ackee) - Svelte module for Ackee
+- [ackee_dart](https://github.com/marchellodev/ackee_dart) - Ackee plugin for Dart/Flutter ([pub.dev](https://pub.dev/packages/ackee_dart))
+- [ackee-tracker-consent](https://www.npmjs.com/package/ackee-tracker-consent) - A consent banner to activate detailed tracking on Ackee
 
 ### Links
 

@@ -14,7 +14,10 @@ The node server shows you the UI and receives the request from all of your sites
 - [With Netlify](#with-netlify)
 - [With Vercel](#with-vercel)
 - [With Heroku](#with-heroku)
+- [With Qovery](#with-qovery)
 - [With Render](#with-render)
+- [With Railway](#with-railway)
+- [With Koyeb](#with-koyeb)
 
 ## With Docker Compose
 
@@ -126,7 +129,7 @@ Ackee dependents on …
 
 - [Node.js](https://nodejs.org/en/) (v14 or newer)
 - [yarn](https://yarnpkg.com/en/)
-- [MongoDB](https://www.mongodb.com) (v4.0.6 or newer)
+- [MongoDB](https://www.mongodb.com) (v4.4 or newer)
 
 Make sure to install and update all dependencies before you continue. The installation instructions for the individual dependencies can be found on the linked websites.
 
@@ -237,6 +240,28 @@ git push heroku master
 
 After your application re-deploys you'll have the latest version of Ackee!
 
+## With Qovery
+
+[Qovery](https://qovery.com) is a fully-managed cloud platform that runs on your AWS, GCP, Azure and Digital Ocean account where you can host static sites, backend APIs, databases, cron jobs, and all your other apps in one place.
+
+### 1. Create a Qovery account.
+
+Visit the [Qovery dashboard](https://console.qovery.com) to create an account if you don't already have one.
+
+### 2. Create a project
+
+Click on "Create a new project" and give a name to your project.
+
+### 3. Add an application
+
+Click on "Create an application" then choose "I have an application" and select your GitHub or GitLab repository where your Ackee app is located.
+
+Select "MongoDB" service then choose a version. Give the database a name and continue with "Next".
+
+Click on "Deploy".
+
+Chat with Qovery developers on [Discord](https://discord.qovery.com) if you need help.
+
 ## With Render
 
 You can use [Render's](https://render.com/) one-click deploy button to get up and running with Ackee in minutes.
@@ -246,3 +271,53 @@ Click **Deploy to Render** below and follow the prompts to set up Ackee on Rende
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/render-examples/ackee)
 
 Once your deploy has finished, you are ready to start using Ackee! Visit the URL for your service to login. You can get your login credentials from the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables in the **Environment** tab of your service. By default, your username will be `render` and your password will be a randomly generated string.
+
+## With Railway
+
+You can use the [Railway](https://railway.app/) button for a one-click deployment and have Ackee running within minutes.
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/starters/ackee)
+
+Upon clicking the button, you will be asked to set the `ACKEE_USERNAME` and `ACKEE_PASSWORD` environment variables. Once you do that, everything should just work on it's own. Railway will automatically provision the MongoDB database for you and also link it to your Ackee deployment!
+
+## With Koyeb
+
+[Koyeb](https://www.koyeb.com) is a developer-friendly serverless platform to deploy apps globally. The platform lets you seamlessly run Docker containers, web apps, and APIs with git-based deployment, native autoscaling, free SSL, a global edge network, and built-in service mesh and discovery.
+
+### 1. Configure Ackee
+
+- You need to have a MongoDB instance running (e.g. [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
+- Ensure that you're using the correct CORS headers by setting [`ACKEE_ALLOW_ORIGIN`](CORS%20headers.md#platforms-as-a-service-configuration)
+- Have the [Koyeb CLI](https://www.koyeb.com/docs/cli/installation) installed which is the fastest way to deploy Ackee
+
+### 2. Deploy Ackee
+
+Before deploying Ackee on Koyeb, create three secrets to securely store your Ackee username, password, and your MongoDB URL.
+In your terminal execute the following to create the secrets:
+
+```sh
+$ koyeb secret create mongodb-url
+✔ Enter your secret: mongodb://<username>:<password>@<host>:<port>/<db>
+
+$ koyeb secret create ackee-username
+✔ Enter your secret: <ackee_username>
+
+$ koyeb secret create ackee-password
+✔ Enter your secret: <ackee_password>
+```
+
+Once you’ve created the secrets, you can deploy Ackee. In your terminal run the following command to create a new Koyeb App and deploy the Ackee service.
+
+```sh
+koyeb app init ackee --docker electerious/ackee --ports 3000:http --routes /:3000 --env ACKEE_USERNAME=@ackee-username --env ACKEE_PASSWORD=@ackee-password --env ACKEE_MONGODB=@mongodb-url --env ACKEE_ALLOW_ORIGIN="https://example.com"
+```
+
+Your Ackee service is being deployed. To retrieve the Ackee URL run:
+
+```
+$ koyeb app get ackee
+ID                                  	NAME     	DOMAINS                         	UPDATED AT
+30de8301-05b1-4131-a842-28e608900000	ackee   	ackee-<YOUR_KOYEB_ORG>.koyeb.app	2021-07-06 11:58:01.143967 +0000 UTC
+```
+
+Open the URL to access Ackee.
