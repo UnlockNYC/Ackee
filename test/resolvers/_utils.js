@@ -14,10 +14,10 @@ const connect = require('../../src/utils/connect')
 const createArray = require('../../src/utils/createArray')
 const { day, minute } = require('../../src/utils/times')
 
-const mongoDb = new MongoMemoryServer()
+const mongoDb = MongoMemoryServer.create()
 
 const connectToDatabase = async () => {
-	const dbUrl = await mongoDb.getUri()
+	const dbUrl = (await mongoDb).getUri()
 	return connect(dbUrl)
 }
 
@@ -30,35 +30,35 @@ const fillDatabase = async (t) => {
 
 	const now = Date.now()
 
-	const records = createArray(14).map((item, i) => ({
-		clientId: `client-${ i }`,
+	const records = createArray(14).map((item, index) => ({
+		clientId: `client-${ index }`,
 		domainId: t.context.domain.id,
 		siteLocation: 'https://example.com/',
 		siteReferrer: 'https://google.com/',
 		siteLanguage: 'en',
-		source: i > 4 ? 'Newsletter' : undefined,
-		screenWidth: i === 1 ? 0 : 414,
-		screenHeight: i === 1 ? 0 : 896,
+		source: index > 4 ? 'Newsletter' : undefined,
+		screenWidth: index === 1 ? 0 : 414,
+		screenHeight: index === 1 ? 0 : 896,
 		screenColorDepth: 32,
 		deviceName: 'iPhone',
 		deviceManufacturer: 'Apple',
 		osName: 'iOS',
-		osVersion: i > 7 ? '13.0' : '14.0',
+		osVersion: index > 7 ? '13.0' : '14.0',
 		browserName: 'Safari',
-		browserVersion: i > 7 ? '13.0' : '14.0',
-		browserWidth: i === 1 ? 0 : 414,
-		browserHeight: i === 1 ? 0 : 719,
+		browserVersion: index > 7 ? '13.0' : '14.0',
+		browserWidth: index === 1 ? 0 : 414,
+		browserHeight: index === 1 ? 0 : 719,
 		// Set fake duration
-		created: now - i * day - minute,
-		updated: now - i * day
+		created: now - index * day - minute,
+		updated: now - index * day,
 	}))
 
-	const actions = createArray(14).map((item, i) => ({
+	const actions = createArray(14).map((item, index) => ({
 		eventId: t.context.event.id,
-		key: `Key ${ i + 1 }`,
-		value: i + 1,
-		created: now - i * day,
-		updated: now - i * day
+		key: `Key ${ index + 1 }`,
+		value: index + 1,
+		created: now - index * day,
+		updated: now - index * day,
 	}))
 
 	await Record.insertMany(records)
@@ -67,16 +67,16 @@ const fillDatabase = async (t) => {
 
 const cleanupDatabase = async (t) => {
 	await Token.findOneAndDelete({
-		id: t.context.token.id
+		id: t.context.token.id,
 	})
 	await Domain.findOneAndDelete({
-		id: t.context.domain.id
+		id: t.context.domain.id,
 	})
 }
 
 const disconnectFromDatabase = async () => {
 	mongoose.disconnect()
-	mongoDb.stop()
+	;(await mongoDb).stop()
 }
 
 const api = async (base, body, token, headers = {}) => {
@@ -86,18 +86,18 @@ const api = async (base, body, token, headers = {}) => {
 	defaultHeaders['Content-Type'] = 'application/json'
 	defaultHeaders['Authorization'] = token == null ? undefined : `Bearer ${ token }`
 
-	const res = await fetch(url.href, {
+	const result = await fetch(url.href, {
 		method: 'post',
 		body: JSON.stringify(body),
 		headers: {
 			...defaultHeaders,
-			...headers
-		}
+			...headers,
+		},
 	})
 
 	return {
-		headers: res.headers,
-		json: await res.json()
+		headers: result.headers,
+		json: await result.json(),
 	}
 }
 
@@ -106,5 +106,5 @@ module.exports = {
 	fillDatabase,
 	cleanupDatabase,
 	disconnectFromDatabase,
-	api
+	api,
 }

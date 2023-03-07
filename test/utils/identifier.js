@@ -5,45 +5,41 @@ const uuid = require('uuid').v4
 
 const identifier = require('../../src/utils/identifier')
 
-test('return different identifiers', async (t) => {
-
+test('return different identifiers', (t) => {
 	const domainId = uuid()
 
-	const req = () => ({
+	const request = () => ({
 		headers: {
-			'user-agent': uuid()
+			'user-agent': uuid(),
 		},
 		connection: {
-			remoteAddress: uuid()
-		}
+			remoteAddress: uuid(),
+		},
 	})
 
-	const reqA = req()
-	const reqB = req()
+	const requestA = request()
+	const requestB = request()
 
-	const a = identifier(reqA, reqA.headers['user-agent'], domainId)
-	const b = identifier(reqB, reqB.headers['user-agent'], domainId)
+	const a = identifier(requestA, requestA.headers['user-agent'], domainId)
+	const b = identifier(requestB, requestB.headers['user-agent'], domainId)
 
 	t.not(a, b)
-
 })
 
-test('return same identifiers', async (t) => {
-
+test('return same identifiers', (t) => {
 	const domainId = uuid()
 
-	const req = {
+	const request = {
 		headers: {
-			'user-agent': uuid()
+			'user-agent': uuid(),
 		},
 		connection: {
-			remoteAddress: uuid()
-		}
+			remoteAddress: uuid(),
+		},
 	}
 
-	const a = identifier(req, req.headers['user-agent'], domainId)
-	const b = identifier(req, req.headers['user-agent'], domainId)
+	const a = identifier(request, request.headers['user-agent'], domainId)
+	const b = identifier(request, request.headers['user-agent'], domainId)
 
 	t.is(a, b)
-
 })
