@@ -29,6 +29,8 @@ const labels = {
 		[ranges.RANGES_LAST_7_DAYS]: '7 days',
 		[ranges.RANGES_LAST_30_DAYS]: '30 days',
 		[ranges.RANGES_LAST_6_MONTHS]: '6 months',
+		[ranges.RANGES_LAST_12_MONTHS]: '12 months',
+		[ranges.RANGES_LAST_7_YEARS]: '7 years',
 	},
 	intervals: {
 		[intervals.INTERVALS_DAILY]: 'Daily',
@@ -139,6 +141,8 @@ const Filter = (props) => {
 		createButton('7 days', 'Show last 7 days', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_7_DAYS),
 		createButton('30 days', 'Show last 30 days', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_30_DAYS),
 		createButton('6 months', 'Show last 6 months', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_6_MONTHS),
+		createButton('12 months', 'Show last 12 months', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_12_MONTHS),
+		createButton('7 years', 'Show last 7 years', props.setRangeFilter, props.filters.range, ranges.RANGES_LAST_7_YEARS),
 	]
 
 	const intervalsButtons = [

@@ -42,5 +42,13 @@ module.exports = (ids, average, range, limit, dateDetails) => {
 		aggregation[0].$match.created = { $gte: dateDetails.lastMonths(6) }
 	}
 
+	if (range === ranges.RANGES_LAST_12_MONTHS) {
+		aggregation[0].$match.created = { $gte: dateDetails.lastMonths(12) }
+	}
+
+	if (range === ranges.RANGES_LAST_7_YEARS) {
+		aggregation[0].$match.created = { $gte: dateDetails.lastMonths(84) }
+	}
+
 	return aggregation
 }

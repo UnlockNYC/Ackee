@@ -38,7 +38,7 @@ macro.title = (providedTitle, options) => `fetch ${ Object.values(options).join(
 test(macro, {
 	sorting: 'TOP',
 	type: 'NO_VERSION',
-	range: 'LAST_6_MONTHS',
+	range: 'LAST_12_MONTHS',
 }, (t, browsers) => {
 	t.is(browsers.length, 1)
 	t.is(browsers[0].value, 'Safari')
@@ -47,7 +47,7 @@ test(macro, {
 test(macro, {
 	sorting: 'RECENT',
 	type: 'NO_VERSION',
-	range: 'LAST_6_MONTHS',
+	range: 'LAST_7_YEARS',
 }, (t, browsers) => {
 	t.is(browsers.length, 14)
 	t.is(browsers[0].value, 'Safari')
