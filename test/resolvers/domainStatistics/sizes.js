@@ -38,7 +38,7 @@ macro.title = (providedTitle, options) => `fetch ${ Object.values(options).join(
 test(macro, {
 	sorting: 'TOP',
 	type: 'BROWSER_WIDTH',
-	range: 'LAST_12_MONTHS',
+	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
 	t.is(sizes[0].value, '414px')
@@ -47,7 +47,7 @@ test(macro, {
 test(macro, {
 	sorting: 'TOP',
 	type: 'BROWSER_HEIGHT',
-	range: 'LAST_7_YEARS',
+	range: 'LAST_6_MONTHS',
 }, (t, sizes) => {
 	t.is(sizes.length, 2)
 	t.is(sizes[0].value, '719px')
